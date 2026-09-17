@@ -1,0 +1,16 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="Flask" />
+          <option value="matplotlib" />
+          <option value="pytest" />
+          <option value="scikit-learn" />
+          <option value="streamlit" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
