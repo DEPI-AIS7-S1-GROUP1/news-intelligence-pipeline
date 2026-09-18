@@ -1,0 +1,32 @@
+# Core data handling
+pandas>=2.0
+numpy>=1.24
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
+
+# Progress bars
+tqdm>=4.65
+
+# Environment variables (.env loading)
+python-dotenv>=1.0
+
+# Dataset download (Kaggle)
+kagglehub>=0.3
+
+# Schema validation
+pydantic>=2.0
+
+# Retry logic with exponential backoff
+tenacity>=8.2
+
+# Groq API client (sync + async)
+groq>=0.9
+
+# Local/offline fallback model
+transformers>=4.40
+torch>=2.2
+
+# Lets asyncio.run() work inside an already-running Jupyter kernel
+nest_asyncio>=1.5
