@@ -1,0 +1,15 @@
+transformers==5.17.0
+torch==2.14.0
+accelerate==1.15.0
+groq==1.7.0
+pydantic==2.13.5
+tenacity==9.1.4
+pandas==3.0.6
+numpy==2.5.3
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+python-dotenv==1.2.3
+tqdm==4.70.1
+nest-asyncio==1.6.0
+kagglehub==1.0.2
