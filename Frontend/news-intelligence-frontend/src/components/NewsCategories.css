@@ -1,0 +1,132 @@
+.news-categories {
+  padding: 100px 32px;
+  background: #16171d;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.news-categories-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #f3f4f6;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.section-description {
+  font-size: 18px;
+  color: #9ca3af;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  background: rgba(30, 32, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  background: rgba(30, 32, 42, 0.8);
+  border-color: var(--category-color);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.category-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+  color: var(--category-color);
+}
+
+.category-card:hover .category-icon {
+  background: color-mix(in srgb, var(--category-color) 15%, transparent);
+  border-color: var(--category-color);
+  transform: scale(1.1);
+}
+
+.category-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f3f4f6;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .news-categories {
+    padding: 80px 24px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .category-card {
+    padding: 20px;
+  }
+
+  .category-icon {
+    font-size: 28px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-categories {
+    padding: 60px 20px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

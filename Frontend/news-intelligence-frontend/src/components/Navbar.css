@@ -1,0 +1,125 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(22, 23, 29, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: var(--heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: #f3f4f6;
+  letter-spacing: -0.5px;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar-menu li a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+  color: #f3f4f6;
+}
+
+.navbar-menu li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366F1, #8B5CF6);
+  border-radius: 2px;
+}
+
+.navbar-cta {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+
+.navbar-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+}
+
+@media (max-width: 1024px) {
+  .navbar-container {
+    padding: 14px 24px;
+    gap: 24px;
+  }
+
+  .navbar-menu {
+    gap: 24px;
+  }
+
+  .navbar-menu li a {
+    font-size: 14px;
+  }
+
+  .navbar-cta {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar-cta {
+    margin-left: auto;
+  }
+}
