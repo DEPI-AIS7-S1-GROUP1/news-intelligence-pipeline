@@ -1,0 +1,30 @@
+# ============================================================================
+# News Intelligence API - Runtime Dependencies
+# ============================================================================
+# These are the dependencies needed to run the FastAPI backend.
+# This is a subset of the notebook's requirements, excluding EDA/visualization
+# packages that are not needed for the production API.
+
+# FastAPI and Server
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# Pydantic for validation and settings
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Groq API client (Primary LLM provider)
+groq>=0.9.0
+
+# Retry logic with exponential backoff
+tenacity>=8.2.0
+
+# Environment variable loading
+python-dotenv>=1.0.0
+
+# Optional: Add these if you want to implement the full transformers fallback
+# Uncomment to enable local model fallback (requires ~500MB+ model download)
+# transformers>=4.40.0
+# torch>=2.2.0
+# accelerate>=0.25.0
