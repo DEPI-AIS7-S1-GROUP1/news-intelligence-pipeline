@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { BarChart3, Building2, Target } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './IntelligencePreview.css';
@@ -10,7 +9,8 @@ const IntelligencePreview = () => {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const metricsRef = useRef(null);
-  const sentimentBarRef = useRef(null);
+  const codePanelRef = useRef(null);
+  const sentimentFillRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -18,30 +18,13 @@ const IntelligencePreview = () => {
 
     const ctx = gsap.context(() => {
       // Header animation
-      if (headerRef.current && headerRef.current.children) {
+      if (headerRef.current) {
         gsap.from(Array.from(headerRef.current.children), {
           scrollTrigger: {
             trigger: headerRef.current,
             start: 'top 80%',
-            toggleActions: 'play none none reverse',
           },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'power3.out',
-        });
-      }
-
-      // Metrics animation
-      if (metricsRef.current && metricsRef.current.children) {
-        gsap.from(Array.from(metricsRef.current.children), {
-          scrollTrigger: {
-            trigger: metricsRef.current,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse',
-          },
-          y: 60,
+          y: 35,
           opacity: 0,
           duration: 0.8,
           stagger: 0.15,
@@ -49,20 +32,50 @@ const IntelligencePreview = () => {
         });
       }
 
-      // Sentiment bar fill animation
-      if (sentimentBarRef.current) {
-        gsap.fromTo(sentimentBarRef.current, {
-          width: '0%',
-        }, {
-          width: '75%',
+      // Code panel animation
+      if (codePanelRef.current) {
+        gsap.from(codePanelRef.current, {
           scrollTrigger: {
-            trigger: sentimentBarRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            trigger: codePanelRef.current,
+            start: 'top 75%',
           },
-          duration: 1.2,
-          ease: 'power2.out',
+          y: 45,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out',
         });
+      }
+
+      // Metrics grid animation
+      if (metricsRef.current) {
+        gsap.from(Array.from(metricsRef.current.children), {
+          scrollTrigger: {
+            trigger: metricsRef.current,
+            start: 'top 75%',
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+        });
+      }
+
+      // Sentiment fill bar
+      if (sentimentFillRef.current) {
+        gsap.fromTo(
+          sentimentFillRef.current,
+          { width: '0%' },
+          {
+            width: '84%',
+            scrollTrigger: {
+              trigger: sentimentFillRef.current,
+              start: 'top 85%',
+            },
+            duration: 1.2,
+            ease: 'power2.out',
+          }
+        );
       }
     }, section);
 
@@ -70,65 +83,111 @@ const IntelligencePreview = () => {
   }, []);
 
   return (
-    <section className="intelligence-preview" ref={sectionRef}>
-      <div className="intelligence-preview-container">
+    <section className="section-scene intelligence-preview-scene" id="intelligence-preview" ref={sectionRef}>
+      <div className="scene-container">
+        {/* Section Header */}
         <div className="section-header" ref={headerRef}>
-          <span className="section-label">Intelligence Preview</span>
-          <h2 className="section-title">See AI Analysis in Action</h2>
-          <p className="section-description">
-            Real-time processing transforms raw news articles into structured intelligence with sentiment, entities, and contextual insights.
+          <span className="section-meta-tag">02 · INTELLIGENCE PREVIEW</span>
+          <h2 className="scene-title">See AI Analysis in Action</h2>
+          <p className="scene-description">
+            Real-time inference transforms raw news text into structured intelligence with sentiment scoring, entity maps, and contextual confidence.
           </p>
         </div>
 
-        <div className="preview-demo">
-          <div className="analysis-grid" ref={metricsRef}>
-            <div className="analysis-metric">
-              <div className="metric-header">
-                <span className="metric-label">Sentiment</span>
-                <div className="metric-icon">
-                  <BarChart3 size={18} />
-                </div>
+        <div className="preview-layout-grid">
+          {/* Left: Code Snippet / API Request Visual */}
+          <div className="api-code-panel" ref={codePanelRef}>
+            <div className="panel-header">
+              <span className="panel-dot red" />
+              <span className="panel-dot yellow" />
+              <span className="panel-dot green" />
+              <span className="panel-title">POST /api/v1/classify</span>
+              <span className="panel-status">200 OK</span>
+            </div>
+
+            <div className="code-content">
+              <div className="code-block request-block">
+                <span className="code-comment">// Input Payload</span>
+                <pre>
+                  <code>{`{
+  "headline": "Global Markets React to Quantum Computing Breakthrough",
+  "source": "Tech News Daily",
+  "text": "Financial analysts predict significant shifts..."
+}`}</code>
+                </pre>
               </div>
-              <p className="metric-value">Positive</p>
-              <p className="metric-description">
-                Overall tone indicates optimistic outlook with constructive framing
+
+              <div className="code-divider">
+                <span className="divider-label">AI PROCESSING PIPELINE</span>
+              </div>
+
+              <div className="code-block response-block">
+                <span className="code-comment">// API Response Output</span>
+                <pre>
+                  <code>{`{
+  "category": "technology",
+  "confidence": 0.948,
+  "sentiment": "positive",
+  "score": 0.84,
+  "entities_count": 8
+}`}</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Metrics & Output Visualization */}
+          <div className="metrics-column" ref={metricsRef}>
+            {/* Sentiment Metric Card */}
+            <div className="metric-card">
+              <div className="metric-top">
+                <span className="metric-label">SENTIMENT ANALYSIS</span>
+                <span className="metric-badge positive">POSITIVE</span>
+              </div>
+              <div className="metric-score-row">
+                <span className="metric-big-val">0.84</span>
+                <span className="metric-sub-val">Confidence: 94.8%</span>
+              </div>
+              <p className="metric-explainer">
+                Optimistic outlook with constructive market framing.
               </p>
-              <div className="sentiment-bar">
-                <div className="sentiment-fill" ref={sentimentBarRef}></div>
+              <div className="sentiment-bar-track">
+                <div className="sentiment-fill" ref={sentimentFillRef} />
               </div>
             </div>
 
-            <div className="analysis-metric">
-              <div className="metric-header">
-                <span className="metric-label">Key Entities</span>
-                <div className="metric-icon">
-                  <Building2 size={18} />
-                </div>
+            {/* Entity Extraction Card */}
+            <div className="metric-card">
+              <div className="metric-top">
+                <span className="metric-label">EXTRACTED ENTITIES</span>
+                <span className="metric-badge dim">8 DETECTED</span>
               </div>
-              <p className="metric-value">8 Detected</p>
-              <p className="metric-description">
-                Organizations, people, and locations extracted
-              </p>
-              <div className="entities-list">
-                <span className="entity-tag">OpenAI</span>
-                <span className="entity-tag">Microsoft</span>
-                <span className="entity-tag">Sam Altman</span>
-                <span className="entity-tag">Silicon Valley</span>
+              <div className="entities-chip-grid">
+                <span className="entity-chip">OpenAI</span>
+                <span className="entity-chip">Microsoft</span>
+                <span className="entity-chip">Sam Altman</span>
+                <span className="entity-chip">QuantumTech</span>
+                <span className="entity-chip">Silicon Valley</span>
+                <span className="entity-chip">Boston</span>
               </div>
             </div>
 
-            <div className="analysis-metric">
-              <div className="metric-header">
-                <span className="metric-label">Category</span>
-                <div className="metric-icon">
-                  <Target size={18} />
+            {/* Classification Category Card */}
+            <div className="metric-card">
+              <div className="metric-top">
+                <span className="metric-label">PRIMARY CATEGORY</span>
+                <span className="metric-badge accent">TECHNOLOGY</span>
+              </div>
+              <div className="category-detail">
+                <div className="cat-row">
+                  <span className="cat-key">Primary Topic</span>
+                  <span className="cat-val">AI / Machine Learning</span>
+                </div>
+                <div className="cat-row">
+                  <span className="cat-key">Secondary Topic</span>
+                  <span className="cat-val">Markets & Finance</span>
                 </div>
               </div>
-              <p className="metric-value">Technology</p>
-              <p className="metric-description">
-                Primary: AI/Machine Learning<br/>
-                Secondary: Business Strategy
-              </p>
             </div>
           </div>
         </div>

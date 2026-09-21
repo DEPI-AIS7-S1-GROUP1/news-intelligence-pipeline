@@ -1,21 +1,30 @@
 :root {
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  /* Color Palette per design.md */
+  --bg-primary: #050505;
+  --bg-surface: rgba(255, 255, 255, 0.02);
+  --bg-surface-hover: rgba(255, 255, 255, 0.04);
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d4;
+  --text-muted: #8a8a8a;
+  --text-dim: #555555;
+  --accent-red: #e53935;
+  --accent-red-glow: rgba(229, 57, 53, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-focus: rgba(255, 255, 255, 0.2);
+
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
   color-scheme: dark;
-  color: #9ca3af;
-  background: #0a0a0f;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -33,36 +42,33 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   width: 100%;
-}
-
-body {
-  position: relative;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  width: 100%;
+  background: var(--bg-primary);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: #f3f4f6;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -75,19 +81,31 @@ a {
 }
 
 button {
-  font-family: inherit;
+  font-family: var(--sans);
   cursor: pointer;
   border: none;
   outline: none;
+  background: transparent;
+  color: inherit;
 }
 
-code {
+code, pre {
   font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: #f3f4f6;
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.05);
 }
+
+/* Scrollbar customization for dark sleek look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+

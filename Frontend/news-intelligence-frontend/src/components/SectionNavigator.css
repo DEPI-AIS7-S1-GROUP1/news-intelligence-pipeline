@@ -1,0 +1,121 @@
+.section-navigator {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  pointer-events: auto;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0;
+  cursor: pointer;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  position: relative;
+}
+
+.nav-item:hover .nav-button {
+  color: var(--text-secondary);
+}
+
+.nav-item.active .nav-button {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.active-indicator-line {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  background-color: var(--accent-red);
+  box-shadow: 0 0 8px var(--accent-red);
+  transition: width 0.3s ease;
+}
+
+.nav-number {
+  line-height: 1;
+}
+
+.nav-label-tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: rgba(15, 15, 15, 0.9);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.nav-button:hover .nav-label-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 900px) {
+  .section-navigator {
+    left: 1rem;
+  }
+  .nav-label-tooltip {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-navigator {
+    position: fixed;
+    top: auto;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(5, 5, 5, 0.85);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .active-indicator-line {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+}

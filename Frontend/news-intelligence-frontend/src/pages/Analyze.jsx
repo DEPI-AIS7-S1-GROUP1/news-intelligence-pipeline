@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FileText, Sparkles, Tag, Building2, Users, Calendar, AlertCircle, CheckCircle } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
 import './Analyze.css';
 
 const Analyze = () => {
@@ -27,7 +28,7 @@ const Analyze = () => {
     setResults(null);
 
     try {
-      const response = await fetch('http://localhost:8000/api/news/analyze', {
+      const response = await fetch(API_ENDPOINTS.analyze, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

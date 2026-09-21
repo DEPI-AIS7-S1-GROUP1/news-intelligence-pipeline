@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { FileText, Tag, Building2, Heart, Brain, Lightbulb } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './CoreCapabilities.css';
@@ -13,99 +12,95 @@ const CoreCapabilities = () => {
 
   const capabilities = [
     {
-      icon: FileText,
+      code: 'CAP-01',
       title: 'Summarization',
-      description: 'Generate concise summaries that capture essential information and main arguments without losing critical details.'
+      description: 'Generate concise, objective summaries extracting core arguments, statements, and factual takeaways from lengthy news content.'
     },
     {
-      icon: Tag,
+      code: 'CAP-02',
       title: 'Classification',
-      description: 'Automatically categorize articles by topic, industry, and content type using multi-label classification models.'
+      description: 'Categorize articles across domains (Technology, Business, Politics, Science, Health) using multi-label confidence models.'
     },
     {
-      icon: Building2,
+      code: 'CAP-03',
       title: 'Entity Extraction',
-      description: 'Identify and extract people, organizations, locations, dates, and other named entities from unstructured text.'
+      description: 'Detect and map named entities including key figures, organizations, geopolitical locations, and dates.'
     },
     {
-      icon: Heart,
+      code: 'CAP-04',
       title: 'Sentiment Analysis',
-      description: 'Measure emotional tone, detect bias, and assess positivity or negativity across content and entities.'
+      description: 'Evaluate emotional tone, contextual bias, and overall polarity scores across text segments.'
     },
     {
-      icon: Brain,
+      code: 'CAP-05',
       title: 'Contextual Understanding',
-      description: 'Understand relationships between entities, detect implications, and surface underlying themes and narratives.'
+      description: 'Map entity relationships, detect underlying narrative implications, and identify broader sector impacts.'
     },
     {
-      icon: Lightbulb,
+      code: 'CAP-06',
       title: 'Actionable Insights',
-      description: 'Generate intelligence reports with key findings, impact assessment, and decision-relevant recommendations.'
+      description: 'Produce high-density intelligence payload formatted into machine-readable, production-ready JSON.'
     }
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial state to visible
-      gsap.set([headerRef.current.children, cardsRef.current.children], {
-        opacity: 1,
-        y: 0
-      });
+      if (headerRef.current) {
+        gsap.from(Array.from(headerRef.current.children), {
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 80%',
+          },
+          y: 35,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+        });
+      }
 
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-      });
-
-      gsap.from(cardsRef.current.children, {
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none none',
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-      });
+      if (cardsRef.current) {
+        gsap.from(Array.from(cardsRef.current.children), {
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 75%',
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="core-capabilities" id="features" ref={sectionRef}>
-      <div className="core-capabilities-container">
+    <section className="section-scene core-capabilities-scene" id="core-capabilities" ref={sectionRef}>
+      <div className="scene-container">
+        {/* Section Header */}
         <div className="section-header" ref={headerRef}>
-          <span className="section-label">Capabilities</span>
-          <h2 className="section-title">What News Intelligence Can Do</h2>
-          <p className="section-description">
-            Comprehensive analysis powered by state-of-the-art NLP and machine learning
+          <span className="section-meta-tag">04 · SYSTEM CAPABILITIES</span>
+          <h2 className="scene-title">What News Intelligence Can Do</h2>
+          <p className="scene-description">
+            Comprehensive textual analysis engineered for speed, accuracy, and structured API delivery.
           </p>
         </div>
 
+        {/* 6 Capabilities Grid */}
         <div className="capabilities-grid" ref={cardsRef}>
-          {capabilities.map((capability, index) => {
-            const Icon = capability.icon;
-            return (
-              <div key={index} className="capability-card">
-                <div className="capability-icon-wrapper">
-                  <Icon size={24} />
-                </div>
-                <h3 className="capability-title">{capability.title}</h3>
-                <p className="capability-description">{capability.description}</p>
+          {capabilities.map((cap) => (
+            <div key={cap.code} className="capability-card">
+              <div className="cap-card-header">
+                <span className="cap-code">{cap.code}</span>
+                <span className="cap-accent-bar" />
               </div>
-            );
-          })}
+              <h3 className="cap-title">{cap.title}</h3>
+              <p className="cap-description">{cap.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
