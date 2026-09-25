@@ -9,6 +9,7 @@ from ..core.logging_config import get_logger
 from ..schemas import NewsAnalysis, NewsAnalysisRequest
 from .groq_service import GroqService, PipelineError
 from .fallback_service import FallbackService
+from .link_resolver import resolve_article_link
 
 logger = get_logger(__name__)
 
@@ -62,9 +63,16 @@ class NewsAnalysisService:
                     date=request.date or ""
                 )
                 
+                # Resolve article link without altering LLM prompt
+                result.article_link = resolve_article_link(
+                    headline=request.headline,
+                    short_description=request.short_description,
+                    explicit_link=request.link
+                )
+                
                 logger.info(
                     f"Successfully analyzed with Groq: "
-                    f"category={result.category}, confidence={result.confidence:.2f}"
+                    f"category={result.category}, confidence={result.confidence:.2f}, link={result.article_link}"
                 )
                 
                 return result, "groq"
@@ -97,9 +105,16 @@ class NewsAnalysisService:
             date=request.date or ""
         )
         
+        # Resolve article link for fallback
+        result.article_link = resolve_article_link(
+            headline=request.headline,
+            short_description=request.short_description,
+            explicit_link=request.link
+        )
+        
         logger.info(
             f"Fallback analysis complete: "
-            f"category={result.category}, confidence={result.confidence:.2f}"
+            f"category={result.category}, confidence={result.confidence:.2f}, link={result.article_link}"
         )
         
         return result, "fallback"

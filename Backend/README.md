@@ -4,11 +4,13 @@ A production-ready FastAPI backend for AI-powered news article classification an
 
 ## Features
 
-- **Automated Category Classification**: Categorizes news articles into 9 major categories
+- **Automated Category Classification**: Categorizes news articles into 9 major categories (~85% accuracy)
+- **Article Link Resolution**: Automatically matches original article URLs from the 209k HuffPost dataset archive or text extraction; returns `"could not find it"` if not present
 - **Entity Extraction**: Identifies people, organizations, and locations mentioned in articles
 - **Intelligent Summarization**: Generates concise one-sentence summaries
 - **Confidence Scoring**: Provides confidence levels for all classifications
 - **High Availability**: Automatic retry with exponential backoff and fallback to rule-based analysis
+- **Docker Support**: Containerized with Docker and Docker Compose
 - **Production-Ready**: Clean architecture, comprehensive logging, CORS support, and Swagger documentation
 
 ## Categories

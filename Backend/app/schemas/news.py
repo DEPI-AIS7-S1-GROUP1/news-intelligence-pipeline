@@ -65,6 +65,10 @@ class NewsAnalysis(BaseModel):
     summary: str = Field(
         description="One-sentence, neutral restatement of the article's key point."
     )
+    article_link: str = Field(
+        default="could not find it",
+        description="Link to the article if found, otherwise 'could not find it'"
+    )
 
 
 class NewsAnalysisRequest(BaseModel):
@@ -86,6 +90,10 @@ class NewsAnalysisRequest(BaseModel):
     date: Optional[str] = Field(
         default="",
         description="Publication date"
+    )
+    link: Optional[str] = Field(
+        default="",
+        description="Optional article link or URL"
     )
 
 

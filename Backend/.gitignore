@@ -53,8 +53,6 @@ htmlcov/
 # FastAPI
 .cache/
 
-# Model weights (if using transformers fallback)
-models/
-*.bin
-*.pt
-*.pth
+# Database files
+*.db
+*.sqlite3

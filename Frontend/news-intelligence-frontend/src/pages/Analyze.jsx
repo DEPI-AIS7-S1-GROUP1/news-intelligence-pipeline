@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, Sparkles, Tag, Building2, Users, Calendar, AlertCircle, CheckCircle } from 'lucide-react';
+import { FileText, Sparkles, Tag, Building2, Users, Calendar, AlertCircle, CheckCircle, ExternalLink, Link2 } from 'lucide-react';
 import { API_ENDPOINTS } from '../config/api';
 import './Analyze.css';
 
@@ -8,7 +8,8 @@ const Analyze = () => {
     headline: '',
     short_description: '',
     authors: '',
-    date: ''
+    date: '',
+    link: ''
   });
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
@@ -133,6 +134,21 @@ const Analyze = () => {
                   className="form-input"
                   placeholder="Publication date (e.g., 2024-01-15)..."
                   value={formData.date}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="link">
+                  Article Link / URL (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="link"
+                  name="link"
+                  className="form-input"
+                  placeholder="https://example.com/article..."
+                  value={formData.link}
                   onChange={handleChange}
                 />
               </div>
@@ -276,6 +292,26 @@ const Analyze = () => {
                     </div>
                   </div>
                 )}
+
+                <div className="result-card">
+                  <div className="result-card-title">
+                    <Link2 className="result-card-icon" size={16} />
+                    Article Link
+                  </div>
+                  {results.data.article_link && results.data.article_link.toLowerCase() !== "could not find it" ? (
+                    <a
+                      href={results.data.article_link.startsWith('http') ? results.data.article_link : `https://${results.data.article_link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="article-link-anchor"
+                    >
+                      <ExternalLink size={15} />
+                      <span>{results.data.article_link}</span>
+                    </a>
+                  ) : (
+                    <div className="article-link-not-found">could not find it</div>
+                  )}
+                </div>
 
                 <div className="result-card">
                   <div className="result-card-title">

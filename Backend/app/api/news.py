@@ -44,7 +44,8 @@ async def analyze_news(
         "headline": "Apple Unveils New iPhone With AI Features",
         "short_description": "Apple CEO Tim Cook announced the device at headquarters.",
         "authors": "Jane Doe",
-        "date": "2024-01-15"
+        "date": "2024-01-15",
+        "link": "https://example.com/apple-iphone"
     }
     ```
     
@@ -61,7 +62,8 @@ async def analyze_news(
                 "locations": ["headquarters"]
             },
             "key_dates": [],
-            "summary": "Apple announced a new iPhone with AI features."
+            "summary": "Apple announced a new iPhone with AI features.",
+            "article_link": "https://example.com/apple-iphone"
         },
         "provider": "groq"
     }
